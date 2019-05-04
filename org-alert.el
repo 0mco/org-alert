@@ -36,11 +36,12 @@
 
 (require 's)
 (require 'dash)
-(require 'alert)
+;; (require 'alert)
+(require 'notifications)
 (require 'org-agenda)
 
 
-(defvar org-alert-interval 300
+(defvar org-alert-interval 60
   "Interval in seconds to recheck and display deadlines.")
 
 
@@ -96,7 +97,8 @@
         (save-restriction
           (let ((active (org-alert--filter-active (org-alert--get-headlines))))
             (dolist (dl (org-alert--strip-states active))
-              (alert dl :title org-alert-notification-title))))))
+              ;; (alert dl :title org-alert-notification-title))))))
+              (notifications-notify :title "Hello" :body org-alert-notification-title))))))
     (when (get-buffer org-agenda-buffer-name)
       (ignore-errors
     	(with-current-buffer org-agenda-buffer-name
